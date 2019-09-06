@@ -1,5 +1,5 @@
 import React from "react";
-import "./Header.scss";
+import { HeaderStyle } from "./headerStyle";
 import { Link } from "react-router-dom";
 import { Row, Col, Icon, Menu, Button, Popover } from "antd";
 
@@ -57,41 +57,43 @@ class Header extends React.Component {
     );
 
     return (
-      <div id="header" className="header">
-        {menuMode === "inline" ? (
-          <Popover
-            overlayClassName="popover-menu"
-            placement="bottomRight"
-            content={menu}
-            trigger="click"
-            visible={menuVisible}
-            arrowPointAtCenter
-            onVisibleChange={this.onMenuVisibleChange}
-          >
-            <Icon
-              className="nav-phone-icon"
-              // onClick={this.handleShowMenu}
-            />
-          </Popover>
-        ) : null}
-        <Row>
-          <Col xxl={20} xl={19} lg={16} md={16} sm={0} xs={0}>
-            <div className="header-meta">
-              <div id="preview">
-                <a
-                  id="preview-button"
-                  target="_blank"
-                  href="https://www.icw.io/en/pricing"
-                  rel="noopener noreferrer"
-                >
-                  <Button icon="dollar">View Pricing</Button>
-                </a>
+      <HeaderStyle>
+        <div id="header" className="header">
+          {menuMode === "inline" ? (
+            <Popover
+              overlayClassName="popover-menu"
+              placement="bottomRight"
+              content={menu}
+              trigger="click"
+              visible={menuVisible}
+              arrowPointAtCenter
+              onVisibleChange={this.onMenuVisibleChange}
+            >
+              <Icon
+                className="nav-phone-icon"
+                // onClick={this.handleShowMenu}
+              />
+            </Popover>
+          ) : null}
+          <Row>
+            <Col xxl={20} xl={19} lg={16} md={16} sm={0} xs={0}>
+              <div className="header-meta">
+                <div id="preview">
+                  <a
+                    id="preview-button"
+                    target="_blank"
+                    href="https://www.icw.io/en/pricing"
+                    rel="noopener noreferrer"
+                  >
+                    <Button icon="dollar">View Pricing</Button>
+                  </a>
+                </div>
+                {menuMode === "horizontal" ? <div id="menu">{menu}</div> : null}
               </div>
-              {menuMode === "horizontal" ? <div id="menu">{menu}</div> : null}
-            </div>
-          </Col>
-        </Row>
-      </div>
+            </Col>
+          </Row>
+        </div>
+      </HeaderStyle>
     );
   }
 }

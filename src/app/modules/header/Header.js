@@ -1,38 +1,11 @@
 import React, { Component } from "react";
-import "./Header.scss";
 import { Link, withRouter } from "react-router-dom";
 import { Layout, Menu, Icon, Drawer } from "antd";
 import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "@browser/LocalStorage";
-import styled from "styled-components";
+
 import { enquireScreen } from "enquire-js";
 
-const MobileStyle = styled.div`
-  .nav-phone-icon {
-    cursor: pointer;
-    display: none;
-    height: 22px;
-    position: absolute;
-    left: 20px;
-    top: 25px;
-    width: 16px;
-    z-index: 1;
-  }
-
-  .nav-phone-icon {
-    display: block;
-  }
-
-  .nav-phone-icon::before {
-    background: #fff;
-    border-radius: 2px;
-    box-shadow: 0 6px 0 0 #fff, 0 12px 0 0 #fff;
-    content: "";
-    display: block;
-    height: 2px;
-    position: absolute;
-    width: 20px;
-  }
-`;
+import { MobileStyle, HeaderStyle } from "./headerStyle";
 
 const { Header } = Layout;
 
@@ -76,7 +49,7 @@ class HeaderPage extends Component {
     const currentKey = history.location.pathname;
 
     return (
-      <React.Fragment>
+      <HeaderStyle>
         {!desktop && (
           <MobileStyle>
             <span
@@ -123,7 +96,7 @@ class HeaderPage extends Component {
             </Menu>
           </Header>
         )}
-      </React.Fragment>
+      </HeaderStyle>
     );
   }
 }
