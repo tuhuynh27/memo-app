@@ -68,7 +68,7 @@ class LandingPage extends Component {
             <div key="button" className="button-wrapper">
               <Link to="/home">
                 <Button size="large" type="default">
-                  <Icon type="appstore" />
+                  <Icon type="bulb" />
                   View my memos
                 </Button>
               </Link>

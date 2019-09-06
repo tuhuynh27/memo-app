@@ -89,8 +89,14 @@ class HeaderPage extends Component {
             >
               <Menu.Item key="/home">
                 <Link to="/home">
-                  <Icon type="home" />
-                  Home
+                  <Icon type="folder" />
+                  My Memo
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="/create">
+                <Link to="/create">
+                  <Icon type="plus" />
+                  Create new Memo
                 </Link>
               </Menu.Item>
             </Menu>
