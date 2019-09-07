@@ -24,6 +24,7 @@ class Create extends Component {
     data: null,
     imgURL: null,
     loading: false,
+    submitting: false,
     isMobile: false
   };
 
@@ -32,6 +33,7 @@ class Create extends Component {
   };
 
   success = () => {
+    this.setState({ submitting: true });
     message.loading("Action in progress..", 0.5).then(() => {
       const done = this.doSave();
       if (done) {
@@ -39,6 +41,7 @@ class Create extends Component {
         this.props.history.push("/home");
       } else {
         message.error("Nothing to save!");
+        this.setState({ submitting: false });
       }
     });
   };
@@ -90,7 +93,7 @@ class Create extends Component {
   };
 
   render() {
-    const { isMobile, imgURL, loading } = this.state;
+    const { isMobile, imgURL, loading, submitting } = this.state;
 
     return (
       <Content className="content-container">
@@ -129,7 +132,7 @@ class Create extends Component {
               type="primary"
               style={{ marginTop: "1rem" }}
               onClick={this.saveMemo}
-              disabled={loading}
+              disabled={loading || submitting}
             >
               <Icon type="check" />
               Save this Memo

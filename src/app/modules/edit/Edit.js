@@ -42,6 +42,7 @@ class Edit extends Component {
       data: memoData.data,
       imgURL: memoData.img,
       loading: false,
+      submitting: false,
       isMobile: false
     };
   }
@@ -51,6 +52,7 @@ class Edit extends Component {
   };
 
   success = () => {
+    this.setState({ submitting: true });
     message.loading("Action in progress..", 0.5).then(() => {
       const done = this.doSave();
       if (done) {
@@ -59,6 +61,7 @@ class Edit extends Component {
         history.push("/home");
       } else {
         message.error("Nothing to save!");
+        this.setState({ submitting: false });
       }
     });
   };
@@ -108,7 +111,7 @@ class Edit extends Component {
   }
 
   render() {
-    const { isMobile, data, imgURL, loading } = this.state;
+    const { isMobile, data, imgURL, loading, submitting } = this.state;
 
     return (
       <Content className="content-container">
@@ -147,7 +150,7 @@ class Edit extends Component {
               type="primary"
               style={{ marginTop: "1rem" }}
               onClick={this.saveMemo}
-              disabled={loading}
+              disabled={loading || submitting}
             >
               <Icon type="check" />
               Save this Memo

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Layout, Card, Row, Col, Divider, Icon, Button } from "antd";
+import { Layout, Card, Row, Col, Icon, Button, message } from "antd";
 import Exception from "ant-design-pro/lib/Exception";
 import { Link, withRouter } from "react-router-dom";
 
@@ -72,6 +72,7 @@ class Home extends Component {
   removeMemo = memoID => {
     LocalStorageUtils.removeMemo(memoID);
 
+    message.success("Deleted successfully!");
     this.setState({
       memos: LocalStorageUtils.getMemos()
     });
