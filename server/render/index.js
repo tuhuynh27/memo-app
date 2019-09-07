@@ -9,8 +9,8 @@ import Main from "../../src/app/Main";
 
 const stats = require("../../dist/react-loadable.json");
 
-function renderer(app, store) {
-  app.get("*", renderApp(store));
+function renderer(app) {
+  app.get("*", renderApp);
 }
 
 const renderApp = () => async (req, res) => {
