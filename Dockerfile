@@ -15,6 +15,7 @@ FROM node:10.15.3-alpine
 WORKDIR /root/src/app
 
 COPY --from=builder /root/src/app/dist /root/src/app/dist
+COPY --from=builder /root/src/app/package.json /root/src/app/package.json
 
 EXPOSE 3000
 
