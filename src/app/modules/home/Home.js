@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import { Layout, Card, Row, Col, Divider, Icon } from "antd";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 import LocalStorageUtils from "@browser/LocalStorage";
 import TimeAgo from "react-timeago";
@@ -30,10 +30,15 @@ class Home extends Component {
                   objectFit: "cover",
                   height: "10rem"
                 }}
+                onClick={() => this.editMemo(memo.id)}
               />
             }
             actions={[
-              <Icon type="edit" key="edit" />,
+              <Icon
+                type="edit"
+                key="edit"
+                onClick={() => this.editMemo(memo.id)}
+              />,
               <Icon
                 type="close"
                 key="close"
@@ -43,14 +48,16 @@ class Home extends Component {
             ]}
             style={{ marginBottom: "1rem" }}
           >
-            <Meta
-              style={{
-                height: "6rem",
-                overflow: "hidden"
-              }}
-              title={memo.data.replace(/<(?:.|\n)*?>/gm, "")}
-              description={memo.data.replace(/<(?:.|\n)*?>/gm, "")}
-            />
+            <Link to={`/edit?id=${memo.id}`}>
+              <Meta
+                style={{
+                  height: "6rem",
+                  overflow: "hidden"
+                }}
+                title={memo.data.replace(/<(?:.|\n)*?>/gm, "")}
+                description={memo.data.replace(/<(?:.|\n)*?>/gm, "")}
+              />
+            </Link>
           </Card>
         </Col>
       );
@@ -63,6 +70,12 @@ class Home extends Component {
     this.setState({
       memos: LocalStorageUtils.getMemos()
     });
+  };
+
+  editMemo = memoID => {
+    const { history } = this.props;
+
+    history.push(`edit?id=${memoID}`);
   };
 
   render() {
@@ -92,4 +105,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default withRouter(Home);

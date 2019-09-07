@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CreateStyle = styled.div`
+export const EditStyle = styled.div`
   display: table;
   margin: auto;
   .ck-editor__editable {

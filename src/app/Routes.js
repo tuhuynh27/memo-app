@@ -18,6 +18,13 @@ const Create = Loadable({
   webpack: () => [require.resolveWeak("../app/modules/create/Create")]
 });
 
+const Edit = Loadable({
+  loader: () => import(/* webpackChunkName: "edit" */ "./modules/edit/Edit"),
+  loading: () => <Loading />,
+  modules: ["../app/modules/edit/Edit"],
+  webpack: () => [require.resolveWeak("../app/modules/edit/Edit")]
+});
+
 export default [
   {
     path: "/home",
@@ -28,5 +35,10 @@ export default [
     path: "/create",
     title: "Create",
     component: Create
+  },
+  {
+    path: "/edit",
+    title: "Edit",
+    component: Edit
   }
 ];

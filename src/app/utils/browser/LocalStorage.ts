@@ -52,6 +52,16 @@ function getMemos(): Memo[] {
   return Array.isArray(memos) && memos.length ? memos : [];
 }
 
+function getMemoByID(id: string): Memo | undefined {
+  const memos = getMemos();
+
+  if (Array.isArray(memos) && memos.length) {
+    return memos.find(e => e.id === id);
+  }
+
+  return undefined;
+}
+
 function saveMemos(memos: Memo[]): void {
   const memosStr = JSON.stringify(memos);
   setItem(LOCAL_STORAGE_KEY.MEMO, memosStr);
@@ -62,6 +72,25 @@ function addMemo(memo: Memo): void {
   memos.push(memo);
 
   saveMemos(memos);
+}
+
+function saveMemo(memo: Memo): void {
+  const memos = getMemos();
+
+  const updatedMemos = memos.map(e => {
+    if (e.id === memo.id) {
+      return {
+        id: e.id,
+        data: memo.data,
+        img: memo.img,
+        time: memo.time
+      };
+    }
+
+    return e;
+  });
+
+  saveMemos(updatedMemos);
 }
 
 function removeMemo(memoID: string): void {
@@ -79,6 +108,8 @@ export default {
   isAuthenticated,
   getJWT,
   getMemos,
+  getMemoByID,
   addMemo,
+  saveMemo,
   removeMemo
 };
