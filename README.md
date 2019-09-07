@@ -12,7 +12,7 @@ Deployed at Heroku: [https://memo.mrhmt.com/](memo.mrhmt.com)
 Run with Docker Compose:
 
 ```bash
-$ docker-compose up -d
+$ docker-compose up
 ```
 
 Run with Node.js and NPM:
