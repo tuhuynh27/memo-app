@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
-import { Layout, Card, Row, Col, Divider, Icon } from "antd";
+import { Layout, Card, Row, Col, Divider, Icon, Button } from "antd";
+import Exception from "ant-design-pro/lib/Exception";
 import { Link, withRouter } from "react-router-dom";
 
 import LocalStorageUtils from "@browser/LocalStorage";
@@ -88,20 +89,23 @@ class Home extends Component {
     return (
       <Content className="content-container">
         <div className="content-wrapper">
-          <Divider style={{ fontWeight: "lighter", fontSize: "1.5rem" }}>
-            Memos
-          </Divider>
           {memos && Array.isArray(memos) && memos.length > 0 && (
             <Row gutter={16}>{this.renderMemos(memos)}</Row>
           )}
           {(!memos || memos.length <= 0) && (
-            <div>
-              You don't have any memo, let's{" "}
-              <strong>
-                <Link to="/create">create one</Link>
-              </strong>
-              !
-            </div>
+            <Exception
+              type="404"
+              actions={
+                <Link to="/create">
+                  <Button type="primary">
+                    <Icon type="plus" />
+                    Create a Memo
+                  </Button>
+                </Link>
+              }
+              title="Hello"
+              desc="You don't have any memo."
+            />
           )}
         </div>
       </Content>
