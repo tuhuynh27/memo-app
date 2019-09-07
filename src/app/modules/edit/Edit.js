@@ -9,6 +9,7 @@ import LocalStorageUtils from "@browser/LocalStorage";
 import getImage from "../../utils/common/getImage";
 import { enquireScreen } from "enquire-js";
 import queryString from "query-string";
+import TimeAgo from "react-timeago";
 
 const { Content } = Layout;
 
@@ -41,11 +42,22 @@ class Edit extends Component {
       id: params.id,
       data: memoData.data,
       imgURL: memoData.img,
+      time: memoData.time,
       loading: false,
       submitting: false,
       isMobile: false
     };
   }
+
+  removeMemo = () => {
+    const { id } = this.state;
+    LocalStorageUtils.removeMemo(id);
+
+    message.success("Deleted successfully!");
+
+    const { history } = this.props;
+    history.push("/home");
+  };
 
   saveMemo = () => {
     this.success();
@@ -56,9 +68,8 @@ class Edit extends Component {
     message.loading("Action in progress..", 0.5).then(() => {
       const done = this.doSave();
       if (done) {
+        this.setState({ submitting: false, time: new Date().getTime() });
         message.success("Saved successfully!");
-        const { history } = this.props;
-        history.push("/home");
       } else {
         message.error("Nothing to save!");
         this.setState({ submitting: false });
@@ -69,7 +80,7 @@ class Edit extends Component {
   doSave = () => {
     const { id, data, imgURL } = this.state;
     if (!data || !data.trim()) {
-      return false;
+      return;
     }
 
     const memoObj = {
@@ -111,7 +122,7 @@ class Edit extends Component {
   }
 
   render() {
-    const { isMobile, data, imgURL, loading, submitting } = this.state;
+    const { isMobile, data, imgURL, loading, submitting, time } = this.state;
 
     return (
       <Content className="content-container">
@@ -145,7 +156,6 @@ class Edit extends Component {
                 />
               )}
             </div>
-
             <Button
               type="primary"
               style={{ marginTop: "1rem" }}
@@ -154,6 +164,22 @@ class Edit extends Component {
             >
               <Icon type="check" />
               Save this Memo
+            </Button>
+            <span style={{ marginLeft: "0.5rem" }}>
+              Saved <TimeAgo date={time} />
+            </span>
+
+            <Button
+              type="danger"
+              style={{
+                marginTop: "1rem",
+                float: "right"
+              }}
+              onClick={this.removeMemo}
+              disabled={loading || submitting}
+            >
+              <Icon type="close" />
+              Delete
             </Button>
           </EditorStyle>
         </div>

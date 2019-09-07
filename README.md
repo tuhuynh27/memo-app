@@ -7,7 +7,7 @@ Tech Stack:
 - Ant Design
 - Node.js, Express Server
 
-Deployed at Heroku: [http://memo.mrhmt.com/](memo.mrhmt.com)
+Deployed at Heroku: [https://memo.mrhmt.com/](memo.mrhmt.com)
 
 Run with Docker Compose:
 
