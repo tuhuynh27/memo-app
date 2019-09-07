@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { EditStyle } from "./editStyle";
+import { EditorStyle } from "../shared/EditorStyle";
 
 import { withRouter } from "react-router-dom";
 
@@ -7,7 +7,6 @@ import { Layout, Button, Icon, Skeleton, message } from "antd";
 
 import CKEditor from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import uuid from "uuid";
 import LocalStorageUtils from "@browser/LocalStorage";
 import axios from "axios";
 import { enquireScreen } from "enquire-js";
@@ -113,7 +112,7 @@ class Edit extends Component {
     return (
       <Content className="content-container">
         <div className="content-wrapper">
-          <EditStyle>
+          <EditorStyle>
             <div
               style={{
                 width: "700px",
@@ -150,7 +149,7 @@ class Edit extends Component {
               <Icon type="check" />
               Save this Memo
             </Button>
-          </EditStyle>
+          </EditorStyle>
         </div>
       </Content>
     );

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { CreateStyle } from "./createStyle";
+import { EditorStyle } from "../shared/EditorStyle";
 
 import { withRouter } from "react-router-dom";
 
@@ -96,7 +96,7 @@ class Create extends Component {
     return (
       <Content className="content-container">
         <div className="content-wrapper">
-          <CreateStyle>
+          <EditorStyle>
             <div
               style={{
                 width: "700px",
@@ -133,7 +133,7 @@ class Create extends Component {
               <Icon type="check" />
               Save this Memo
             </Button>
-          </CreateStyle>
+          </EditorStyle>
         </div>
       </Content>
     );
