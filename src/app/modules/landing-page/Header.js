@@ -1,5 +1,5 @@
 import React from "react";
-import { HeaderStyle } from "./headerStyle";
+import { HeaderStyle } from "./HeaderStyle";
 import { Link } from "react-router-dom";
 import { Row, Col, Icon, Menu, Button, Popover } from "antd";
 

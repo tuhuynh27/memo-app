@@ -5,7 +5,7 @@ import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "@browser/LocalStorage";
 
 import { enquireScreen } from "enquire-js";
 
-import { MobileStyle, HeaderStyle } from "./headerStyle";
+import { MobileStyle, HeaderStyle } from "./HeaderStyle";
 
 const { Header } = Layout;
 

@@ -9,7 +9,7 @@ import CKEditor from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import uuid from "uuid";
 import LocalStorageUtils from "@browser/LocalStorage";
-import axios from "axios";
+import getImage from "../../utils/common/getImage";
 import { enquireScreen } from "enquire-js";
 
 const { Content } = Layout;
@@ -73,18 +73,11 @@ class Create extends Component {
 
     this.setState({ loading: true });
 
-    if (imgURL !== null)
-      await new Promise((resolve, _) => {
-        setTimeout(() => {
-          resolve();
-        }, 2000);
-      });
-
     try {
-      const res = await axios.get("https://source.unsplash.com/random/800x200");
-      this.setState({ imgURL: res.request.responseURL });
+      const imageURL = await getImage(imgURL !== null);
+      this.setState({ imgURL: imageURL });
     } catch (err) {
-      console.error(err);
+      console.log(err);
     }
 
     this.setState({ loading: false });
