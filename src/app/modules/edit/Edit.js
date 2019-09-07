@@ -19,12 +19,6 @@ const ClassicEditor =
     ? require("@ckeditor/ckeditor5-build-classic")
     : null;
 
-let isMobile;
-
-enquireScreen(b => {
-  isMobile = b;
-});
-
 class Edit extends Component {
   constructor(props) {
     super(props);
@@ -47,7 +41,8 @@ class Edit extends Component {
       id: params.id,
       data: memoData.data,
       imgURL: memoData.img,
-      loading: false
+      loading: false,
+      isMobile: false
     };
   }
 
@@ -104,8 +99,16 @@ class Edit extends Component {
     this.setState({ loading: false });
   };
 
+  componentDidMount() {
+    enquireScreen(b => {
+      this.setState({
+        isMobile: !!b
+      });
+    });
+  }
+
   render() {
-    const { data, imgURL, loading } = this.state;
+    const { isMobile, data, imgURL, loading } = this.state;
 
     return (
       <Content className="content-container">

@@ -4,9 +4,10 @@ RUN mkdir -p /root/src/app
 WORKDIR /root/src/app
 ENV PATH /root/src/app/node_modules/.bin:$PATH
 
-COPY . .
-
+COPY package.json package-lock.json ./
 RUN npm install
+
+COPY . .
 RUN npm run build
 
 FROM node:10.15.3-alpine

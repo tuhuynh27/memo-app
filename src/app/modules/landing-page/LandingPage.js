@@ -11,15 +11,9 @@ import { OverPack } from "rc-scroll-anim";
 
 import Header from "./Header";
 
-let isMobile;
-
-enquireScreen(b => {
-  isMobile = b;
-});
-
 class LandingPage extends Component {
   state = {
-    isMobile: typeof window === "undefined" ? false : isMobile
+    isMobile: false
   };
 
   componentDidMount() {

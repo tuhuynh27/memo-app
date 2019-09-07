@@ -19,17 +19,12 @@ const ClassicEditor =
     ? require("@ckeditor/ckeditor5-build-classic")
     : null;
 
-let isMobile;
-
-enquireScreen(b => {
-  isMobile = b;
-});
-
 class Create extends Component {
   state = {
     data: null,
     imgURL: null,
-    loading: false
+    loading: false,
+    isMobile: false
   };
 
   saveMemo = () => {
@@ -67,6 +62,12 @@ class Create extends Component {
   };
 
   componentDidMount() {
+    enquireScreen(b => {
+      this.setState({
+        isMobile: !!b
+      });
+    });
+
     this.getImg();
   }
 
@@ -89,7 +90,7 @@ class Create extends Component {
   };
 
   render() {
-    const { imgURL, loading } = this.state;
+    const { isMobile, imgURL, loading } = this.state;
 
     return (
       <Content className="content-container">
