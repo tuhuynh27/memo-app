@@ -158,16 +158,22 @@ class Edit extends Component {
             </div>
             <Button
               type="primary"
-              style={{ marginTop: "1rem" }}
+              style={{ float: "left", marginTop: "1rem" }}
               onClick={this.saveMemo}
               disabled={loading || submitting}
             >
               <Icon type="check" />
               Save this Memo
             </Button>
-            <span style={{ marginLeft: "0.5rem" }}>
+            <div
+              style={{
+                marginTop: "1.4rem",
+                float: "left",
+                marginLeft: "0.5rem"
+              }}
+            >
               Saved <TimeAgo date={time} />
-            </span>
+            </div>
 
             <Button
               type="danger"
