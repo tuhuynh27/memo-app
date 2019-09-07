@@ -3,7 +3,7 @@ const manifest = require("../../dist/client/manifest.json");
 const vendorCss = [manifest["vendors.css"], manifest["browser.css"]];
 const vendorJs = [manifest["vendors.js"], manifest["browser.js"]];
 
-export default ({ html, preState, helmet, bundles }) => {
+export default ({ html, helmet, bundles }) => {
   let styles = bundles.filter(bundle => bundle.file.endsWith(".css"));
   let scripts = bundles.filter(bundle => bundle.file.endsWith(".js"));
 
@@ -41,12 +41,6 @@ export default ({ html, preState, helmet, bundles }) => {
 </head>
 <body ${helmet.bodyAttributes.toString()}>
     <div id="root">${html}</div>
-    <script>
-        window.__PRELOADED_STATE__ = ${JSON.stringify(preState).replace(
-          /</g,
-          "\\u003c"
-        )}
-    </script>
     ${scripts
       .map(script => {
         return `<script type="text/javascript" src="/client/${script.file}"></script>`;

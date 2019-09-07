@@ -17,4 +17,4 @@ COPY --from=builder /root/src/app/dist /root/src/app/dist
 
 EXPOSE 3000
 
-ENTRYPOINT ["node","./dist/server/server.js"]
+ENTRYPOINT ["npm","run","start"]

@@ -5,14 +5,19 @@ import { withRouter } from "react-router-dom";
 
 import { Layout, Button, Icon, Skeleton, message } from "antd";
 
-import CKEditor from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import LocalStorageUtils from "@browser/LocalStorage";
 import getImage from "../../utils/common/getImage";
 import { enquireScreen } from "enquire-js";
 import queryString from "query-string";
 
 const { Content } = Layout;
+
+const CKEditor =
+  typeof window !== "undefined" ? require("@ckeditor/ckeditor5-react") : null;
+const ClassicEditor =
+  typeof window !== "undefined"
+    ? require("@ckeditor/ckeditor5-build-classic")
+    : null;
 
 let isMobile;
 
@@ -123,14 +128,16 @@ class Edit extends Component {
               </Skeleton>
             </div>
             <div id="editor-area" style={{ maxWidth: "700px" }}>
-              <CKEditor
-                editor={ClassicEditor}
-                data={data}
-                onChange={(_, editor) => {
-                  const data = editor.getData();
-                  this.setState({ data });
-                }}
-              />
+              {typeof window !== "undefined" && (
+                <CKEditor
+                  editor={ClassicEditor}
+                  data={data}
+                  onChange={(_, editor) => {
+                    const data = editor.getData();
+                    this.setState({ data });
+                  }}
+                />
+              )}
             </div>
 
             <Button

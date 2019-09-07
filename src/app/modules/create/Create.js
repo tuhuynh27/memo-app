@@ -5,14 +5,19 @@ import { withRouter } from "react-router-dom";
 
 import { Layout, Button, Icon, Skeleton, message } from "antd";
 
-import CKEditor from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import uuid from "uuid";
 import LocalStorageUtils from "@browser/LocalStorage";
 import getImage from "../../utils/common/getImage";
 import { enquireScreen } from "enquire-js";
 
 const { Content } = Layout;
+
+const CKEditor =
+  typeof window !== "undefined" ? require("@ckeditor/ckeditor5-react") : null;
+const ClassicEditor =
+  typeof window !== "undefined"
+    ? require("@ckeditor/ckeditor5-build-classic")
+    : null;
 
 let isMobile;
 
@@ -107,14 +112,16 @@ class Create extends Component {
               </Skeleton>
             </div>
             <div id="editor-area" style={{ maxWidth: "700px" }}>
-              <CKEditor
-                editor={ClassicEditor}
-                data="<p>Write your memo here</p>"
-                onChange={(_, editor) => {
-                  const data = editor.getData();
-                  this.setState({ data });
-                }}
-              />
+              {typeof window !== "undefined" && (
+                <CKEditor
+                  editor={ClassicEditor}
+                  data="<p>Write your memo here</p>"
+                  onChange={(_, editor) => {
+                    const data = editor.getData();
+                    this.setState({ data });
+                  }}
+                />
+              )}
             </div>
 
             <Button

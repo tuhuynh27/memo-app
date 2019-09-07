@@ -10,12 +10,16 @@ const { Content } = Layout;
 const { Meta } = Card;
 
 class Home extends Component {
-  state = {
-    memos: LocalStorageUtils.getMemos()
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      memos: typeof window !== "undefined" ? LocalStorageUtils.getMemos() : []
+    };
+  }
 
   renderMemos = () => {
     const { memos } = this.state;
+
     memos.sort((a, b) => b.time - a.time);
 
     return memos.map(memo => {
@@ -87,7 +91,7 @@ class Home extends Component {
           <Divider style={{ fontWeight: "lighter", fontSize: "1.5rem" }}>
             Memos
           </Divider>
-          {memos && memos.length > 0 && (
+          {memos && Array.isArray(memos) && memos.length > 0 && (
             <Row gutter={16}>{this.renderMemos(memos)}</Row>
           )}
           {(!memos || memos.length <= 0) && (

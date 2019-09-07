@@ -3,40 +3,22 @@ import * as express from "express";
 import bodyParser from "body-parser";
 import compression from "compression";
 import morgan from "morgan";
-import thunkMiddleware from "redux-thunk";
-import { applyMiddleware, compose, createStore } from "redux";
 import renderer from "./render";
-import state from "../src/app/reducers";
 
 const port = process.env.PORT || 3000;
 const app = express();
 
 function main() {
   injectMiddlewares(app);
-  renderer(app, getStore());
+  renderer(app);
   startServer(app, port);
-}
-
-function getStore() {
-  const middlewares = [thunkMiddleware];
-  const enhancers = [applyMiddleware(...middlewares)];
-  const composedEnhancer = compose(...enhancers);
-  const store = createStore(state, {}, composedEnhancer);
-
-  return store;
 }
 
 function injectMiddlewares(app) {
   app.use(compression());
   app.use(bodyParser.json());
 
-  app.use(
-    morgan("combined", {
-      skip: function(req, res) {
-        return res.statusCode === 200 || res.statusCode === 304;
-      }
-    })
-  );
+  app.use(morgan("combined"));
 
   app.use(function(_, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
