@@ -83,7 +83,7 @@ class LandingPage extends Component {
             </TweenOne>
           )}
         </div>
-        <div className="home-page page2">
+        <div className="home-page page2" hidden={isMobile}>
           <div className="home-page-wrapper">
             <div className="title-line-wrapper page2-line">
               <div className="title-line" />

@@ -27,6 +27,6 @@ export default [
   {
     path: "/create",
     title: "Create",
-    component: Home
+    component: Create
   }
 ];

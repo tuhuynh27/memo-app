@@ -12,7 +12,7 @@ function FooterPage() {
       }}
     >
       <div>
-        <strong>Memo App</strong>.<strong>com</strong> ©2019 Developed by{" "}
+        <strong>Memo App</strong> ©2019 Developed by{" "}
         <strong>
           <a href="https://mrhmt.com" target="_blank" rel="noopener noreferrer">
             Huynh Minh Tu

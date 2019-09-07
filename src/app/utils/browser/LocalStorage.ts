@@ -1,12 +1,6 @@
-import uuidv4 from "uuid/v4";
-
 export const LOCAL_STORAGE_KEY = {
-  JWT: "cfapp_jwt",
-  EMAIL: "cfapp_email",
-  NICKNAME: "cfapp_nickname",
-  SENDER: "cfapp_sendertoken",
-  NOTIFICATION: "cfapp_notification_v1",
-  PUSH_ID: "cfapp_push_id"
+  JWT: "memoapp_jwt",
+  MEMO: "memoapp_memo"
 };
 
 function getItem(key: string, defaultValue: any): any {
@@ -44,11 +38,47 @@ function getJWT(): string {
   return getItem(LOCAL_STORAGE_KEY.JWT, "");
 }
 
+interface Memo {
+  id: string;
+  time: number;
+  data: string;
+  img: string;
+}
+
+function getMemos(): Memo[] {
+  const memosStr = getItem(LOCAL_STORAGE_KEY.MEMO, null);
+  const memos = JSON.parse(memosStr);
+
+  return Array.isArray(memos) && memos.length ? memos : [];
+}
+
+function saveMemos(memos: Memo[]): void {
+  const memosStr = JSON.stringify(memos);
+  setItem(LOCAL_STORAGE_KEY.MEMO, memosStr);
+}
+
+function addMemo(memo: Memo): void {
+  const memos = getMemos();
+  memos.push(memo);
+
+  saveMemos(memos);
+}
+
+function removeMemo(memoID: string): void {
+  const memos = getMemos();
+  const removed = memos.filter(e => e.id !== memoID);
+
+  saveMemos(removed);
+}
+
 export default {
   getItem,
   setItem,
   removeItem,
   clear,
   isAuthenticated,
-  getJWT
+  getJWT,
+  getMemos,
+  addMemo,
+  removeMemo
 };

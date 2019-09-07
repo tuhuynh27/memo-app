@@ -46,7 +46,7 @@ class HeaderPage extends Component {
     const { history } = this.props;
     const { mobileMenu, desktop } = this.state;
 
-    const currentKey = history.location.pathname;
+    let currentKey = history.location.pathname;
 
     return (
       <HeaderStyle>
@@ -64,15 +64,21 @@ class HeaderPage extends Component {
               closable={false}
             >
               <Menu
-                theme="dark"
+                theme="light"
                 mode="inline"
                 style={{ width: "100%", border: 0 }}
                 onClick={this.onToggleMobileMenu}
               >
                 <Menu.Item key="/home">
                   <Link to="/home">
-                    <Icon type="home" />
-                    Home
+                    <Icon type="folder" />
+                    Memos
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key="/create">
+                  <Link to="/create">
+                    <Icon type="plus" />
+                    Create New
                   </Link>
                 </Menu.Item>
               </Menu>
